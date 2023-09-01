@@ -5,7 +5,7 @@ import 'package:hotel_restaurant/Resaurant%20Menu/views/FavouriteFoodPage/fav_fo
 import 'package:hotel_restaurant/Resaurant%20Menu/views/MenuPage/menu.dart';
 import 'package:hotel_restaurant/Resaurant%20Menu/views/Profilepage/profile_screen.dart';
 import 'package:hotel_restaurant/Resaurant%20Menu/views/homepage/home_page.dart';
-
+import 'package:google_nav_bar/google_nav_bar.dart';
 class Mainpage extends StatefulWidget{
   const Mainpage({super.key});
 
@@ -31,28 +31,29 @@ List pages=[
       home: 
          Scaffold(
           body: pages[curIndex],
-          bottomNavigationBar: BottomNavigationBar(
-            showUnselectedLabels: true,
-            unselectedItemColor: mainpage[1],
-            iconSize: 30,
-            elevation: 3,
-            unselectedLabelStyle: TextStyle(color: mainpage[1]),
-            selectedItemColor: mainpage[0],
-            selectedIconTheme: IconThemeData(color: mainpage[0]),
-            unselectedIconTheme: IconThemeData(color: mainpage[1]),
-            currentIndex: curIndex,
-            onTap: (value) {
+          bottomNavigationBar: GNav(
+            onTabChange: (value) {
               setState(() {
                 curIndex=value;
               });
             },
-            items:   const [
-              BottomNavigationBarItem(label:'Live Chat' , icon: Icon(Icons.chat_rounded,),),
-              BottomNavigationBarItem(label:'Profile' ,icon: Icon(Icons.account_circle,)),
-              BottomNavigationBarItem(label:'Home' ,icon: Icon(Icons.home,)),
-              BottomNavigationBarItem(label:'Menu' ,icon: Icon(Icons.restaurant_menu_outlined,)),
-              BottomNavigationBarItem(label:'Favourites' ,icon: Icon(Icons.favorite,)),
-            ]),
+            tabBorderRadius: 100,
+            tabBackgroundColor: Colors.grey,
+            iconSize: 25,
+            padding: const EdgeInsets.only(top: 25,bottom: 25,left: 16,right: 16),
+            mainAxisAlignment: MainAxisAlignment.start,
+            gap: 1,
+            selectedIndex: curIndex,
+            tabs: const [
+              GButton(icon: Icons.chat_rounded,text: 'Live Chat',),
+              GButton(icon: Icons.account_circle,text: 'Profile',),
+              GButton(icon: Icons.home,text: 'Home',),
+              GButton(icon: Icons.menu_book_outlined,text: 'Menu',),
+              GButton(icon: Icons.favorite_border,text: 'Favourites',),
+
+            ],
+
+            ),
         ),
       
     );
